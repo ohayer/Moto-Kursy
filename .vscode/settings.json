@@ -1,0 +1,14 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Moto-kurs",
+      "username": "admin",
+      "password": "1234",
+      "database": "motorq"
+    }
+  ]
+}
