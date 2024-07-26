@@ -1,0 +1,18 @@
+.find-courses {
+  background-color: #d4a017; /* Kolor tła */
+  color: #000000; /* Kolor tekstu */
+  padding: 10px 20px; /* Wewnętrzne marginesy */
+  border: none; /* Brak obramowania */
+  border-radius: 30px; /* Zaokrąglone rogi */
+  font-weight: bold; /* Pogrubiony tekst */
+  font-family: Arial, sans-serif; /* Czcionka */
+  cursor: pointer; /* Kursor wskazujący na klikalność */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Cień */
+  text-align: center; /* Wyśrodkowanie tekstu */
+  display: inline-block; /* Właściwość wyświetlania */
+  transition: background-color 0.3s; /* Animacja zmiany koloru tła */
+}
+
+.find-courses:hover {
+  background-color: #c28e15;
+}
