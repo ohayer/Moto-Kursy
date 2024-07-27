@@ -9,8 +9,10 @@ const Logo = () => (
     }}
   >
     <div className="transform -rotate-12 text-center leading-none">
-      <div className="text-2xl font-bold italic">MOTO</div>
-      <div className="text-base font-semibold italic">KURSY</div>
+      <div className="text-2xl font-bold italic text-primary">MOTO</div>
+      <div className="text-base font-semibold italic text-primary -mt-3">
+        KURSY
+      </div>
     </div>
   </div>
 );

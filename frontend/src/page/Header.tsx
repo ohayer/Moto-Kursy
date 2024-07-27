@@ -11,7 +11,9 @@ const Header = () => {
   ];
   return (
     <header className="bg-gray-800 text-black p-4 items-center flex justify-between bg-wmain">
-      <Logo />
+      <div className="ml-5">
+        <Logo />
+      </div>
       <div className="hidden md:flex items-center gap-4">
         {references.map((reference) => (
           <a
@@ -23,7 +25,7 @@ const Header = () => {
           </a>
         ))}
         <a
-          className="bg-yellow-500 text-black font-bold py-2 px-4 rounded-full hover:bg-yellow-600"
+          className="bg-primary text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600"
           href="/courses"
         >
           Find a Course
