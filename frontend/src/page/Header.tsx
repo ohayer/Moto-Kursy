@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Logo from "./Logo";
 
 const Header = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -9,25 +10,8 @@ const Header = () => {
     { name: "Contact", link: "/contact" },
   ];
   return (
-    <header
-      style={{ backgroundColor: "#F6F2EA" }}
-      className="bg-gray-800 text-black p-4 items-center flex justify-between"
-    >
-      <div
-        id="brand-logo"
-        className="mr-5 relative inline-block p-6 border-2 border-black transform rotate-12 overflow-hidden"
-        style={{
-          clipPath: "polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%)",
-          width: "auto",
-          height: "auto",
-        }}
-      >
-        <div className="transform -rotate-12 text-center leading-none">
-          <div className="text-2xl font-bold italic">MOTO</div>
-          <div className="text-base font-semibold italic">KURSY</div>
-        </div>
-      </div>
-
+    <header className="bg-gray-800 text-black p-4 items-center flex justify-between bg-wmain">
+      <Logo />
       <div className="hidden md:flex items-center gap-4">
         {references.map((reference) => (
           <a
