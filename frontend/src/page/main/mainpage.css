@@ -18,8 +18,5 @@
 }
 
 body {
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj8cR-MxeL71-QYWvugbpVYgrF4OOXkKVPvg&s") !important; /* Ścieżka do ikony */
-  background-repeat: no-repeat; /* Zapobiega powtarzaniu obrazu */
-  background-position: center; /* Ustawia obraz na środku strony */
-  background-size: 100px 100px; /* Ustal rozmiar obrazu, dostosuj według potrzeb */
+  background-color: #f6f2ea;
 }
