@@ -3,6 +3,7 @@ import WebInput, { typeOfInput } from "../../form/WebInput";
 import axios from "axios";
 import { RestUrl } from "../../api/RestUrl";
 import AdminPanel from "./AdminPanel";
+import { useAuth } from "../../context/AuthProvider";
 
 const LoginPage = () => {
   const [formValues, setFormValues] = useState({
@@ -10,8 +11,7 @@ const LoginPage = () => {
     password: "",
   });
   const [message, setMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
-
+  const { isLoggedIn, login, logout } = useAuth();
   const inputs: {
     name: string;
     placeholder: string;
@@ -45,8 +45,7 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(RestUrl.postLogin, formValues);
-      localStorage.setItem("token", response.data.access_token); // saving the token in local storage
-      setIsLoggedIn(true);
+      login(response.data.access_token);
     } catch (error) {
       setMessage("Invalid username or password");
       //clearing the message after 5 seconds
@@ -57,7 +56,7 @@ const LoginPage = () => {
   };
 
   if (isLoggedIn) {
-    return <AdminPanel onLogout={() => setIsLoggedIn(false)} />;
+    return <AdminPanel onLogout={() => logout} />;
   }
 
   return (
@@ -67,14 +66,16 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col items-center justify-center space-y-4">
             {inputs.map((input, index) => (
-              <WebInput
-                key={index}
-                name={input.name}
-                placeholder={input.placeholder}
-                type={input.type}
-                onChange={handleChange}
-                required={input.required}
-              />
+              <div className="w-4/5">
+                <WebInput
+                  key={index}
+                  name={input.name}
+                  placeholder={input.placeholder}
+                  type={input.type}
+                  onChange={handleChange}
+                  required={input.required}
+                />
+              </div>
             ))}
             <button className="btn btn-active btn-primary" type="submit">
               Log in

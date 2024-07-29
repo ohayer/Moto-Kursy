@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import fetchProfile, { UserProfile } from "../../api/FetchProfile";
+import { useEffect } from "react";
 import AdminActions from "./AdminActions.json";
 import { useNavigate } from "react-router-dom";
+import useCheckSession from "./ChceckSession";
 
 const AdminPanel = ({ onLogout }: { onLogout: () => void }) => {
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const { profile, logout } = useCheckSession();
   let navigate = useNavigate();
 
   const handleActionClick = (endpoint: string) => {
@@ -12,19 +12,10 @@ const AdminPanel = ({ onLogout }: { onLogout: () => void }) => {
   };
 
   useEffect(() => {
-    fetchProfile().then((data) => {
-      if (data) setProfile(data);
-      else onLogout();
-    });
-
-    const interval = setInterval(fetchProfile, 60000); // Check token validity every 60 seconds
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    onLogout();
-  };
+    if (!profile) {
+      onLogout();
+    }
+  }, [profile, onLogout]);
 
   if (!profile) {
     return <div>Loading...</div>;
@@ -49,10 +40,7 @@ const AdminPanel = ({ onLogout }: { onLogout: () => void }) => {
             </div>
           ))}
         </div>
-        <button
-          className="btn btn-active btn-secondary mt-4"
-          onClick={handleLogout}
-        >
+        <button className="btn btn-active btn-secondary mt-4" onClick={logout}>
           Log out
         </button>
       </div>
