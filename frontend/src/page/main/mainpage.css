@@ -1,0 +1,18 @@
+.find-courses {
+  background-color: #5c6ac4;
+  color: #000000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.find-courses:hover {
+  background-color: #c28e15;
+}

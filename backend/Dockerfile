@@ -1,5 +1,4 @@
-# Use the official Node.js 14 image as the base image
-FROM node:16
+FROM node:22
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -14,10 +13,13 @@ RUN npm install
 COPY . .
 
 # Install the Nest CLI globally for development purposes
-RUN npm install -g @nestjs/cli
+# RUN npm install -g @nestjs/cli
+
+# Install nodemon globally
+RUN npm install -g nodemon
 
 # Expose the application port
 EXPOSE 3000
 
 # Define the command to run the application in development mode
-CMD ["npm", "run", "start:dev"]
+CMD ["nodemon", "--legacy-watch", "--config", "nodemon.json"]
