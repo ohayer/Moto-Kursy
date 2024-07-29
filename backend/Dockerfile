@@ -1,5 +1,4 @@
-# Use the official Node.js 14 image as the base image
-FROM node:16
+FROM node:22
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -14,7 +13,9 @@ RUN npm install
 COPY . .
 
 # Install the Nest CLI globally for development purposes
-RUN npm install -g @nestjs/cli
+# RUN npm install -g @nestjs/cli
+
+RUN npm run build
 
 # Expose the application port
 EXPOSE 3000

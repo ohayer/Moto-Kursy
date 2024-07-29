@@ -1,6 +1,7 @@
 import { useState } from "react";
 import WebInput, { typeOfInput } from "../../form/WebInput";
-// import axios from "axios";
+import axios from "axios";
+import { RestUrl } from "../../api/RestUrl";
 
 const LoginPage = () => {
   const [formValues, setFormValues] = useState({
@@ -39,15 +40,12 @@ const LoginPage = () => {
     e.preventDefault();
     console.log(formValues);
 
-    /* try {
-      const response = await axios.post(
-        "http://your-backend-url.com/api",
-        formValues
-      );
+    try {
+      const response = await axios.post(RestUrl.postLogin, formValues);
       console.log(response.data);
     } catch (error) {
       console.error("There was an error submitting the form!", error);
-    } */
+    }
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
