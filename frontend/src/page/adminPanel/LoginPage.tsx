@@ -2,12 +2,15 @@ import { useState } from "react";
 import WebInput, { typeOfInput } from "../../form/WebInput";
 import axios from "axios";
 import { RestUrl } from "../../api/RestUrl";
+import AdminPanel from "./AdminPanel";
 
 const LoginPage = () => {
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
   });
+  const [message, setMessage] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
   const inputs: {
     name: string;
@@ -42,11 +45,21 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(RestUrl.postLogin, formValues);
-      console.log(response.data);
+      localStorage.setItem("token", response.data.access_token); // saving the token in local storage
+      setIsLoggedIn(true);
     } catch (error) {
-      console.error("There was an error submitting the form!", error);
+      setMessage("Invalid username or password");
+      //clearing the message after 5 seconds
+      setInterval(() => {
+        setMessage("");
+      }, 5000);
     }
   };
+
+  if (isLoggedIn) {
+    return <AdminPanel onLogout={() => setIsLoggedIn(false)} />;
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="text-7xl p-2">Admin Panel</div>
@@ -66,6 +79,7 @@ const LoginPage = () => {
             <button className="btn btn-active btn-primary" type="submit">
               Log in
             </button>
+            {message && <div className="text-red-500">{message}</div>}
           </div>
         </form>
       </div>

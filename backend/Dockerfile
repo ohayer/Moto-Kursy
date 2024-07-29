@@ -15,10 +15,11 @@ COPY . .
 # Install the Nest CLI globally for development purposes
 # RUN npm install -g @nestjs/cli
 
-RUN npm run build
+# Install nodemon globally
+RUN npm install -g nodemon
 
 # Expose the application port
 EXPOSE 3000
 
 # Define the command to run the application in development mode
-CMD ["npm", "run", "start:dev"]
+CMD ["nodemon", "--legacy-watch", "--config", "nodemon.json"]

@@ -10,6 +10,7 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+    command: nodemon --legacy-watch --watch src --exec ts-node src/main.ts
     depends_on:
       - db
     environment:

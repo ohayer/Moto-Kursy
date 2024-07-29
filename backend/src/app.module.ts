@@ -3,7 +3,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { AppConfigModule } from './config/config.module';
 
@@ -18,10 +17,6 @@ import { AppConfigModule } from './config/config.module';
       database: process.env.DATABASE_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-    }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: './auth/.env', // Ścieżka do pliku .env
     }),
     AuthModule,
     UsersModule,
