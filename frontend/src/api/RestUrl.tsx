@@ -8,4 +8,8 @@ export const RestUrl = {
   postCourse: `${backendUrl}/courses`,
   putCourse: `${backendUrl}/courses/`,
   deleteCourse: `${backendUrl}/courses/`,
+  postUserMessage: `${backendUrl}/user-messages`,
+  getUserMessages: `${backendUrl}/user-messages`,
+  getGroupedUserMessages: `${backendUrl}/user-messages/grouped`,
+  patchUserMessageRead: `${backendUrl}/user-messages/`,
 };

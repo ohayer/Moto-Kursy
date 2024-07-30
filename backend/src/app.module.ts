@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { AppConfigModule } from './config/config.module';
 import { CoursesModule } from './courses/courses.module';
+import { UserMessagesModule } from './userMessages/user-messages.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CoursesModule } from './courses/courses.module';
     AuthModule,
     UsersModule,
     AppConfigModule,
+    UserMessagesModule,
     CoursesModule,
   ],
   controllers: [AppController],

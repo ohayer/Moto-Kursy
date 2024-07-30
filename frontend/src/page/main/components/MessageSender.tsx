@@ -1,5 +1,6 @@
 import { useState } from "react";
 import WebInput, { Input } from "../../../form/WebInput";
+import PostUserMessage from "../../../api/PostUserMessage";
 
 const inputs: Input[] = [
   {
@@ -9,7 +10,7 @@ const inputs: Input[] = [
     required: true,
   },
   {
-    name: "message",
+    name: "content",
     placeholder: "What can we help with?",
     type: "textarea",
     required: true,
@@ -18,11 +19,16 @@ const inputs: Input[] = [
 
 const initialFormValues = {
   email: "",
-  message: "",
+  content: "",
 };
 
 const MessageSender = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEmailSended, setIsEmailSended] = useState({
+    isSended: false,
+    message: "",
+  });
 
   const onInputsChange = (name: string, value: string | number | boolean) => {
     setFormValues((prevValues: any) => ({
@@ -31,30 +37,66 @@ const MessageSender = () => {
     }));
   };
 
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    // Create a promise that resolves after 1 second
+    const delay = new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const dataPromise = PostUserMessage(formValues);
+
+    // Wait for both the delay and the dataPromise to resolve
+    const [data] = await Promise.all([dataPromise, delay]);
+
+    setIsLoading(false);
+    if (data) {
+      setIsEmailSended({
+        isSended: true,
+        message:
+          "Thank you for your message. <br/> We will contact you as soon as possible",
+      });
+    } else {
+      setIsEmailSended({
+        isSended: false,
+        message: "Failed to send the message. <br/> Please try again later",
+      });
+    }
   };
 
-  console.log(formValues);
   return (
     <div className="text-black p-20 sm:p-30 items-center">
       <h3 className="sm:text-3xl text-lg mb-5 w-full flex justify-center">
         Contact us
       </h3>
       <div className="w-full flex justify-center">
-        <form
-          className="flex flex-col space-y-4 items-center justify-center pt-5 text-white w-full max-w-lg"
-          onSubmit={onFormSubmit}
-        >
-          {inputs.map((input, index) => (
-            <div key={index} className="w-full px-4">
-              <WebInput {...input} onChange={onInputsChange} />
-            </div>
-          ))}
-          <button type="submit" className="btn btn-primary w-full mt-4 mx-4">
-            Send
-          </button>
-        </form>
+        {isLoading ? (
+          <span className="loading loading-dots loading-lg"></span>
+        ) : isEmailSended.isSended && isEmailSended.message.length > 2 ? (
+          <p
+            className="text-green-500 text-3xl font-bold"
+            dangerouslySetInnerHTML={{ __html: isEmailSended.message }}
+          />
+        ) : (
+          <form
+            className="flex flex-col space-y-4 items-center justify-center pt-5 text-white w-full max-w-lg"
+            onSubmit={onFormSubmit}
+          >
+            {inputs.map((input, index) => (
+              <div key={index} className="w-full px-4">
+                <WebInput {...input} onChange={onInputsChange} />
+              </div>
+            ))}
+            {isEmailSended.message && isEmailSended.message.length > 2 && (
+              <p
+                className="text-red-500 text-lg font-bold"
+                dangerouslySetInnerHTML={{ __html: isEmailSended.message }}
+              />
+            )}
+            <button type="submit" className="btn btn-primary w-full mt-4 mx-4">
+              Send
+            </button>
+          </form>
+        )}
       </div>
       <div className="flex flex-col items-center space-y-5 pt-20">
         <div className="flex items-center">

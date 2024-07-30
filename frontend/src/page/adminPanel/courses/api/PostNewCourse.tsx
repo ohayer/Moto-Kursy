@@ -4,11 +4,10 @@ import { Course } from "../../../../components/Card";
 
 const PostNewCourse = async (course: Course) => {
   try {
-    const response = await axios.post(RestUrl.postCourse, {
+    const response = await axios.post(RestUrl.postCourse, course, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      data: course,
     });
     return response.data;
   } catch (error) {
