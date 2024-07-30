@@ -20,12 +20,16 @@ const EditCoursesPage = () => {
     fetchCourses();
   }, []);
 
+  const lengthOfValidCourses = courses.filter(
+    (course: any) => course.valid
+  ).length;
+
   return (
     <AdminEditTemplate>
       <div className="bg-white rounded-lg">
         <div className="flex justify-between items-center mb-4">
           <h4 className="text-3xl font-bold">Edit Courses</h4>
-          <CourseModal />
+          <CourseModal validLength={lengthOfValidCourses} />
         </div>
         <div className="flex flex-wrap -mx-4">
           {courses.map((course: any) => (

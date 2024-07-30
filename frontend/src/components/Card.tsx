@@ -5,7 +5,7 @@ export interface Course {
   img_url: string;
   price: number;
   valid: boolean;
-  position: number;
+  position: number | null;
   createdAt: Date;
 }
 
@@ -15,7 +15,7 @@ const Card = (props: Course) => {
       <figure>
         <img
           src={props.img_url}
-          alt="Shoes"
+          alt="Course Image"
           className="h-64 w-full object-cover"
         />
       </figure>

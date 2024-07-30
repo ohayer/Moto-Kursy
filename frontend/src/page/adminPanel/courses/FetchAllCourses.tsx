@@ -9,11 +9,13 @@ const FetchAllCourses = async (navigate: NavigateFunction) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    if (response.status === 401) {
-      navigate("/admin");
-    }
     return response.data;
   } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 401) {
+        navigate("/admin");
+      }
+    }
     console.error("Failed to fetch courses:", error);
     return null;
   }

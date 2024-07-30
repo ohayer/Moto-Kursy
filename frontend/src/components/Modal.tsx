@@ -25,7 +25,7 @@ const Modal: React.FC<ModalProps> = ({ children }) => {
         ➕
       </button>
       <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
+        <div className="modal-box bg-white min-w-[700px]">
           <form method="dialog">
             <button
               className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
