@@ -4,4 +4,5 @@ export const RestUrl = {
   postLogin: `${backendUrl}/auth/login`,
   getProfile: `${backendUrl}/auth/profile`,
   getValidCourses: `${backendUrl}/courses/valid`,
+  getAllCourses: `${backendUrl}/courses`,
 };

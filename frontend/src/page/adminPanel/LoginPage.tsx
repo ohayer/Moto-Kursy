@@ -65,13 +65,7 @@ const LoginPage = () => {
           <div className="flex flex-col items-center justify-center space-y-4">
             {inputs.map((input, index) => (
               <div className="w-4/5" key={index}>
-                <WebInput
-                  name={input.name}
-                  placeholder={input.placeholder}
-                  type={input.type}
-                  onChange={handleChange}
-                  required={input.required}
-                />
+                <WebInput onChange={handleChange} {...input} />
               </div>
             ))}
             <button className="btn btn-active btn-primary" type="submit">

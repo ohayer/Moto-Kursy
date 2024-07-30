@@ -10,8 +10,13 @@ type WebInputProps = {
   required?: boolean;
 };
 
-const WebInput = (props: WebInputProps) => {
-  const { name, placeholder, type, onChange, required = false } = props;
+const WebInput = ({
+  name,
+  placeholder,
+  type,
+  onChange,
+  required = false,
+}: WebInputProps) => {
   const [value, setValue] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
