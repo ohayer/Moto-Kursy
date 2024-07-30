@@ -1,4 +1,4 @@
-import { useState, ReactNode } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import WebSelect from "./WebSelect";
 import WebCheckbox from "./WebCheckbox";
 import { EmailLabel, PasswordLabel } from "./InputLabels";
@@ -16,6 +16,7 @@ type WebInputProps = {
   name: string;
   placeholder: string;
   type: typeOfInput;
+  propValue?: any;
   onChange: (name: string, value: string) => void;
   required?: boolean;
   options?: string[] | number[];
@@ -27,9 +28,14 @@ const WebInput = ({
   type,
   onChange,
   required = false,
+  propValue,
   options: opt = [],
 }: WebInputProps) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(propValue);
+
+  useEffect(() => {
+    setValue(propValue);
+  }, [propValue]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
