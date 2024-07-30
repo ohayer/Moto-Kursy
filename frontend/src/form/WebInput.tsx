@@ -68,7 +68,7 @@ const WebInput = ({
 
   const classNameForInput =
     type === "text" || type === "number"
-      ? "input input-bordered w-full max-w-xs"
+      ? "input input-bordered w-full bg-gray-700"
       : "";
 
   return (
@@ -91,7 +91,7 @@ const WebInput = ({
         />
       ) : type === "textarea" ? (
         <textarea
-          className="textarea textarea-bordered w-full max-w-xs min-h-24"
+          className="textarea textarea-bordered w-full min-h-24 bg-gray-700"
           placeholder={placeholder}
           value={value}
           onChange={(e) => {
@@ -117,6 +117,14 @@ const WebInput = ({
       )}
     </div>
   );
+};
+
+export type Input = {
+  name: string;
+  placeholder: string;
+  type: typeOfInput;
+  required?: boolean;
+  options?: string[] | number[];
 };
 
 export default WebInput;

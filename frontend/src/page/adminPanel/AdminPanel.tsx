@@ -22,7 +22,7 @@ const AdminPanel = () => {
         </h1>
         <p>This is the admin panel.</p>
         <p>Choose action!</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 justify-center text-white">
           {AdminActions.map((action, index) => (
             <div
               key={index}

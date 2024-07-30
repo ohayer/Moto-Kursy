@@ -1,18 +1,10 @@
 import { useEffect, useState } from "react";
 import Modal from "../../../components/Modal";
-import WebInput, { typeOfInput } from "../../../form/WebInput";
+import WebInput, { Input } from "../../../form/WebInput";
 import Card from "../../../components/Card";
 import PostNewCourse from "./api/PostNewCourse";
 import PutCourse from "./api/PutCourse";
 import { closeModal } from "../../../components/Modal";
-
-type Input = {
-  name: string;
-  placeholder: string;
-  type: typeOfInput;
-  required?: boolean;
-  options?: string[] | number[];
-};
 
 const inputs: Input[] = [
   { name: "title", placeholder: "Title", type: "text" },

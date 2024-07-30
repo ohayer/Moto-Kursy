@@ -8,7 +8,7 @@ type SelectProps = {
 const WebSelect = (props: SelectProps) => (
   <select
     value={props.value !== null ? props.value : ""}
-    className="select select-bordered w-full max-w-xs"
+    className="select select-bordered w-full bg-gray-700"
     onChange={props.onChange}
   >
     <option value="" hidden disabled defaultValue={props?.value}>

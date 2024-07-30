@@ -5,7 +5,7 @@ type LabelProps = {
 };
 
 export const EmailLabel = ({ children }: LabelProps) => (
-  <label className="input input-bordered flex items-center gap-2 w-full max-w-xs">
+  <label className="input input-bordered flex items-center gap-2 w-full bg-gray-700">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"
@@ -20,7 +20,7 @@ export const EmailLabel = ({ children }: LabelProps) => (
 );
 
 export const PasswordLabel = ({ children }: LabelProps) => (
-  <label className="input input-bordered flex items-center gap-2  w-full max-w-xs">
+  <label className="input input-bordered flex items-center gap-2  w-full bg-gray-700">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"

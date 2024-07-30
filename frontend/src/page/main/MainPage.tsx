@@ -4,6 +4,7 @@ import Cards from "./components/Cards";
 import BrandDescription from "./components/BrandDescription";
 import "./mainpage.css";
 import StoryCards from "./components/StoryCards";
+import MessageSender from "./components/MessageSender";
 
 const MainPage = () => (
   <div>
@@ -15,6 +16,7 @@ const MainPage = () => (
       <Cards />
     </div>
     <StoryCards />
+    <MessageSender />
     <Footer />
   </div>
 );
