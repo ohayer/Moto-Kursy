@@ -1,9 +1,3 @@
-type Tprops = {
-  title: string;
-  content: string;
-  imgUrl: string;
-};
-
 export interface Course {
   id: number;
   title: string;

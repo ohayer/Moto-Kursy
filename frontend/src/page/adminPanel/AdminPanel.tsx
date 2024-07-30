@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import AdminActions from "./AdminActions.json";
 import { useNavigate } from "react-router-dom";
 import useCheckSession from "./ChceckSession";
 
-const AdminPanel = ({ onLogout }: { onLogout: () => void }) => {
+const AdminPanel = () => {
   const { profile, logout } = useCheckSession();
   let navigate = useNavigate();
 
@@ -11,20 +10,14 @@ const AdminPanel = ({ onLogout }: { onLogout: () => void }) => {
     navigate(endpoint, { replace: true });
   };
 
-  useEffect(() => {
-    if (!profile) {
-      onLogout();
-    }
-  }, [profile, onLogout]);
-
   if (!profile) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded shadow-lg w-full max-w-4xl mx-auto text-center">
-        <h1 className="text-3xl font-bold mb-4">
+      <div className="bg-white sm:p-6 rounded shadow-lg w-full sm:max-w-4xl mx-auto text-center">
+        <h1 className="text-lg sm:text-3xl font-bold mb-4">
           Welcome, {profile.username}!
         </h1>
         <p>This is the admin panel.</p>

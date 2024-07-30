@@ -11,7 +11,7 @@ const LoginPage = () => {
     password: "",
   });
   const [message, setMessage] = useState("");
-  const { isLoggedIn, login, logout } = useAuth();
+  const { isLoggedIn, login } = useAuth();
   const inputs: {
     name: string;
     placeholder: string;
@@ -41,8 +41,6 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formValues);
-
     try {
       const response = await axios.post(RestUrl.postLogin, formValues);
       login(response.data.access_token);
@@ -56,19 +54,18 @@ const LoginPage = () => {
   };
 
   if (isLoggedIn) {
-    return <AdminPanel onLogout={() => logout} />;
+    return <AdminPanel />;
   }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="text-7xl p-2">Admin Panel</div>
-      <div className="bg-white p-6 rounded shadow-lg w-1/4">
+      <div className="text-4xl sm:text-7xl p-2">Admin Panel</div>
+      <div className="bg-white p-6 rounded shadow-lg sm:w-1/4">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col items-center justify-center space-y-4">
             {inputs.map((input, index) => (
-              <div className="w-4/5">
+              <div className="w-4/5" key={index}>
                 <WebInput
-                  key={index}
                   name={input.name}
                   placeholder={input.placeholder}
                   type={input.type}

@@ -26,7 +26,7 @@ const useCheckSession = () => {
     const interval = setInterval(fetchAndSetProfile, 60000); // Check token validity every 60 seconds
 
     return () => clearInterval(interval);
-  }, [logout]);
+  }, []);
   return { profile, logout };
 };
 

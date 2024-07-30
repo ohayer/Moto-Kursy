@@ -13,7 +13,9 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
+    () => !!localStorage.getItem("token")
+  );
 
   const login = (token: string) => {
     localStorage.setItem("token", token);
