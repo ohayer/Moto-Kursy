@@ -17,7 +17,7 @@ type WebInputProps = {
   placeholder: string;
   type: typeOfInput;
   propValue?: any;
-  onChange: (name: string, value: string) => void;
+  onChange: (name: string, value: string | boolean) => void;
   required?: boolean;
   options?: string[] | number[];
 };
@@ -37,9 +37,17 @@ const WebInput = ({
     setValue(propValue);
   }, [propValue]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    onChange(name, e.target.value);
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const newValue =
+      type === "checkbox"
+        ? (e.target as HTMLInputElement).checked
+        : e.target.value;
+    setValue(newValue);
+    onChange(name, newValue);
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -74,10 +82,10 @@ const WebInput = ({
         />
       ) : type === "checkbox" ? (
         <WebCheckbox
-          checked={value === "true"}
+          checked={value === true}
           onChange={(e) => {
-            setValue(e.target.checked.toString());
-            onChange(name, e.target.checked.toString());
+            setValue(e.target.checked);
+            onChange(name, e.target.checked);
           }}
           label={placeholder}
         />

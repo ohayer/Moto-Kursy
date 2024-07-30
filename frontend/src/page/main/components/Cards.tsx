@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
-import Card, { Course } from "../../../components/Card";
+import Card, { FullCourse } from "../../../components/Card";
 import { RestUrl } from "../../../api/RestUrl";
 import axios from "axios";
 
 const Cards = () => {
-  const [validCourses, setValidCourses] = useState<Course[]>([]);
+  const [validCourses, setValidCourses] = useState<FullCourse[]>([]);
 
   useEffect(() => {
-    axios.get<Course[]>(RestUrl.getValidCourses).then((response) => {
+    axios.get<FullCourse[]>(RestUrl.getValidCourses).then((response) => {
       setValidCourses(response.data);
     });
-    console.log(validCourses);
   }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);

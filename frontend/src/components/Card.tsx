@@ -1,15 +1,18 @@
 export interface Course {
-  id: number;
   title: string;
   description: string;
   img_url: string;
   price: number;
   valid: boolean;
+}
+
+export interface FullCourse extends Course {
+  id: number;
   position: number | null;
   createdAt: Date;
 }
 
-const Card = (props: Course) => {
+const Card = (props: FullCourse) => {
   return (
     <div className="card card-compact bg-base-100 w-96 shadow-xl">
       <figure>

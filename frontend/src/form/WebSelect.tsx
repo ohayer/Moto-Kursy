@@ -7,15 +7,17 @@ type SelectProps = {
 
 const WebSelect = (props: SelectProps) => (
   <select
-    value={props.value}
+    value={props.value !== null ? props.value : ""}
     className="select select-bordered w-full max-w-xs"
     onChange={props.onChange}
   >
-    <option value="" hidden disabled selected>
+    <option value="" hidden disabled defaultValue={props?.value}>
       {props.title}
     </option>
     {props.options.map((option, index) => (
-      <option key={index}>{option}</option>
+      <option key={index} value={option}>
+        {option}
+      </option>
     ))}
   </select>
 );

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RestUrl } from "../../../api/RestUrl";
+import { RestUrl } from "../../../../api/RestUrl";
 import { NavigateFunction } from "react-router-dom";
 
 const FetchAllCourses = async (navigate: NavigateFunction) => {

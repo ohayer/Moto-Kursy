@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminEditTemplate from "../AdminEditTemplate";
-import FetchAllCourses from "./FetchAllCourses";
+import FetchAllCourses from "./api/FetchAllCourses";
 import Card from "../../../components/Card";
 import CourseModal from "./CourseModal";
 import { useNavigate } from "react-router-dom";
@@ -12,14 +12,13 @@ const EditCoursesPage = () => {
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
 
+  const fetchCourses = async () => {
+    const data = await FetchAllCourses(navigate);
+    if (data) {
+      setCourses(data);
+    }
+  };
   useEffect(() => {
-    const fetchCourses = async () => {
-      const data = await FetchAllCourses(navigate);
-      if (data) {
-        setCourses(data);
-      }
-    };
-
     fetchCourses();
   }, []);
 
@@ -41,6 +40,7 @@ const EditCoursesPage = () => {
             validLength={lengthOfValidCourses}
             selectedCourse={selectedCourse}
             onClose={() => setSelectedCourse(null)}
+            onSubmitForm={fetchCourses}
           />
         </div>
         <div className="flex flex-wrap -mx-4">
@@ -50,9 +50,9 @@ const EditCoursesPage = () => {
               className="min-w-1/4 flex-shrink-0 ml-4 py-2"
               style={{ flex: `0 0 calc(${100 / 4}% - 16px)` }}
             >
-              <button onClick={() => onSelectedCourse(course)}>
+              <div onClick={() => onSelectedCourse(course)} className="pointer">
                 <Card {...course} />
-              </button>
+              </div>
             </div>
           ))}
         </div>

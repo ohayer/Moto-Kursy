@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  NotFoundException,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { Course } from './course.entity';
@@ -35,13 +36,24 @@ export class CoursesController {
 
   @UseGuards(AuthGuard)
   @Put(':id')
-  update(@Param('id') id: string, @Body() course: Course): Promise<void> {
-    return this.coursesService.update(+id, course);
+  async update(
+    @Param('id') id: number,
+    @Body() course: Course,
+  ): Promise<Course> {
+    const updatedCourse = await this.coursesService.update(+id, course);
+    if (!updatedCourse) {
+      throw new NotFoundException(`Course with ID ${id} not found`);
+    }
+    return updatedCourse;
   }
 
   @UseGuards(AuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
-    return this.coursesService.remove(+id);
+  async remove(@Param('id') id: number): Promise<boolean> {
+    const result = await this.coursesService.remove(+id);
+    if (!result) {
+      throw new NotFoundException(`Course with ID ${id} not found`);
+    }
+    return result;
   }
 }

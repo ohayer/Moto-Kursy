@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import Modal from "../../../components/Modal";
 import WebInput, { typeOfInput } from "../../../form/WebInput";
 import Card from "../../../components/Card";
+import PostNewCourse from "./api/PostNewCourse";
+import PutCourse from "./api/PutCourse";
+import { closeModal } from "../../../components/Modal";
+
 type Input = {
   name: string;
   placeholder: string;
@@ -23,6 +27,7 @@ type CourseModalProps = {
   validLength: number;
   selectedCourse: any;
   onClose: () => void;
+  onSubmitForm: () => void;
 };
 
 const initialFormValues = {
@@ -38,6 +43,7 @@ const CourseModal = ({
   validLength,
   selectedCourse,
   onClose,
+  onSubmitForm,
 }: CourseModalProps) => {
   const [formValues, setFormValues] = useState(initialFormValues);
 
@@ -57,28 +63,45 @@ const CourseModal = ({
   const handleChange = (name: string, value: string | number | boolean) => {
     setFormValues((prevValues) => ({
       ...prevValues,
-      [name]: value,
+      [name]: value !== undefined ? value : "",
     }));
   };
 
-  //   function that showing number of available positions
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (selectedCourse) {
+      const data = await PutCourse(selectedCourse.id, formValues);
+      console.log(data);
+      if (data) {
+        onSubmitForm();
+        closeModal();
+      } else {
+        const data = await PostNewCourse(formValues);
+        if (data) {
+          onSubmitForm();
+          closeModal();
+        }
+      }
+    }
+  };
+
   const optionsForAvailablePositions = Array.from(
     { length: validLength + 1 },
     (_, i) => i + 1
   );
-  // assignment of options to the position input
+
   inputs[4].options = optionsForAvailablePositions;
 
   return (
     <Modal onClose={handleClose}>
       <div className="flex flex-row space-x-8">
         <div className="pt-7">
-          <form>
+          <form onSubmit={handleFormSubmit}>
             {inputs.map((input, index) => (
               <div key={index} className="py-2">
                 <WebInput
                   {...input}
-                  onChange={(value) => handleChange(input.name, value)}
+                  onChange={handleChange}
                   propValue={formValues[input.name as keyof typeof formValues]}
                 />
               </div>

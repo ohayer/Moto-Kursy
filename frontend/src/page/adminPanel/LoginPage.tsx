@@ -32,7 +32,7 @@ const LoginPage = () => {
     },
   ];
 
-  const handleChange = (name: string, value: string) => {
+  const handleChange = (name: string, value: string | boolean) => {
     setFormValues((prevValues) => ({
       ...prevValues,
       [name]: value,
