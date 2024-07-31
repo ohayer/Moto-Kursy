@@ -1,0 +1,5 @@
+[
+  { "name": "Go to Website", "endpoint": "/" },
+  { "name": "Edit Courses", "endpoint": "/admin/courses" },
+  { "name": "Check messages", "endpoint": "/admin/messages" }
+]

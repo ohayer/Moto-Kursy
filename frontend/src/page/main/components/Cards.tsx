@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import Card from "./Card";
+import Card, { FullCourse } from "../../../components/Card";
+import { RestUrl } from "../../../api/RestUrl";
+import axios from "axios";
 
 const Cards = () => {
-  const cardInfo = [
-    { title: "Card 1", content: "This is card 1" },
-    { title: "Card 2", content: "This is card 2" },
-    { title: "Card 3", content: "This is card 3" },
-    { title: "Card 4", content: "This is card 4" },
-    { title: "Card 5", content: "This is card 5" },
-    { title: "Card 6", content: "This is card 6" },
-  ];
+  const [validCourses, setValidCourses] = useState<FullCourse[]>([]);
+
+  useEffect(() => {
+    axios.get<FullCourse[]>(RestUrl.getValidCourses).then((response) => {
+      setValidCourses(response.data);
+    });
+  }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const skipCount = 1;
@@ -47,10 +48,8 @@ const Cards = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  console.log(smallScreen);
-
   const handleNext = () => {
-    if (currentIndex + visibleCards < cardInfo.length) {
+    if (currentIndex + visibleCards < validCourses.length) {
       setCurrentIndex(currentIndex + skipCount);
     }
   };
@@ -67,17 +66,20 @@ const Cards = () => {
 
   return (
     <div className="w-full px-5">
+      <h6 className="ml-6 text-xl text-black mb-2">
+        Course prices are per hour.
+      </h6>
       {smallScreen ? (
         // case when screen is small
         <>
           <div className="flex flex-col items-center">
-            {cardInfo.slice(0, visibleCards).map((card, index) => (
+            {validCourses.slice(0, visibleCards).map((card, index) => (
               <div key={index} className="mb-4">
-                <Card title={card.title} content={card.content} />
+                <Card {...card} />
               </div>
             ))}
           </div>
-          {visibleCards < cardInfo.length && (
+          {visibleCards < validCourses.length && (
             <div className="text-center mt-4">
               <button
                 onClick={showMore}
@@ -107,13 +109,13 @@ const Cards = () => {
                 }%)`,
               }}
             >
-              {cardInfo.map((card, index) => (
+              {validCourses.map((card, index) => (
                 <div
                   key={index}
                   className="min-w-1/4 flex-shrink-0 px-2 mx-2"
                   style={{ flex: `0 0 calc(${100 / visibleCards}% - 16px)` }}
                 >
-                  <Card title={card.title} content={card.content} />
+                  <Card {...card} />
                 </div>
               ))}
             </div>
@@ -121,7 +123,7 @@ const Cards = () => {
           <button
             className="absolute right-0 z-10 bg-gray-200 p-2 rounded-full"
             onClick={handleNext}
-            hidden={currentIndex + visibleCards >= cardInfo.length}
+            hidden={currentIndex + visibleCards >= validCourses.length}
           >
             &gt;
           </button>
