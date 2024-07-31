@@ -1,9 +1,9 @@
 import { useState } from "react";
-import WebInput, { typeOfInput } from "../../form/WebInput";
+import WebInput, { typeOfInput } from "../../../form/WebInput";
 import axios from "axios";
-import { RestUrl } from "../../api/RestUrl";
+import { RestUrl } from "../../../api/RestUrl";
 import AdminPanel from "./AdminPanel";
-import { useAuth } from "../../context/AuthProvider";
+import { useAuth } from "../../../context/AuthProvider";
 
 const LoginPage = () => {
   const [formValues, setFormValues] = useState({

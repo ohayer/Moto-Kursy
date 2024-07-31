@@ -53,12 +53,12 @@ const MessageSender = () => {
       setIsEmailSended({
         isSended: true,
         message:
-          "Thank you for your message. <br/> We will contact you as soon as possible",
+          "Thank you for your message. <br/> We will contact you as soon as possible!",
       });
     } else {
       setIsEmailSended({
         isSended: false,
-        message: "Failed to send the message. <br/> Please try again later",
+        message: "Failed to send the message. <br/> Please try again later.",
       });
     }
   };
@@ -103,10 +103,10 @@ const MessageSender = () => {
           <TalkingPhoneIcon />
           <p className="mt-3 font-bold text-xl">&nbsp;Mon-Fri 08:00-18:00</p>
         </div>
-        <p className="text-xl">
-          In case of anything, we are available at this phone number
+        <p className="text-md sm:text-xl">
+          In case of anything, we are available at this phone number:
         </p>
-        <p className="text-3xl">+XX-XXX-XXX-XXX</p>
+        <p className="text-lg sm:text-3xl">+XX-XXX-XXX-XXX</p>
       </div>
     </div>
   );

@@ -15,20 +15,25 @@ export class UserMessagesService {
     return this.userMessagesRepository.save(newMessage);
   }
 
-  findAll(): Promise<UserMessages[]> {
-    return this.userMessagesRepository.find();
+  async findMessagesByEmail(email: string): Promise<UserMessages[]> {
+    return await this.userMessagesRepository
+      .createQueryBuilder('user_messages')
+      .where('email = :email', { email })
+      .orderBy('created_at', 'ASC')
+      .getMany();
   }
 
   async findGrouped(): Promise<
-    { email: string; count: number; unreadCount: number }[]
+    { email: string; count: number; unreadCount: number; lastDate: Date }[]
   > {
-    return this.userMessagesRepository
-      .createQueryBuilder('userMessages')
-      .select('email', 'created_at')
-      .addSelect('COUNT(*)', 'count')
+    return await this.userMessagesRepository
+      .createQueryBuilder('user_messages')
+      .select('email')
+      .addSelect('COUNT(*)', 'countAll')
       .addSelect('COUNT(CASE WHEN read = false THEN 1 END)', 'unreadCount')
+      .addSelect('MAX(created_at)', 'lastDate')
       .groupBy('email')
-      .orderBy('MAX(createdAt)', 'DESC')
+      .orderBy('MAX(created_at)', 'DESC')
       .getRawMany();
   }
 

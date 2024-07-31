@@ -12,4 +12,5 @@ export const RestUrl = {
   getUserMessages: `${backendUrl}/user-messages`,
   getGroupedUserMessages: `${backendUrl}/user-messages/grouped`,
   patchUserMessageRead: `${backendUrl}/user-messages/`,
+  getUserMessagesByEmail: `${backendUrl}/user-messages/`,
 };

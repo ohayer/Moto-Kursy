@@ -23,18 +23,18 @@ export class UserMessagesController {
     return this.userMessagesService.create(email, content);
   }
 
-  @Get()
-  @UseGuards(AuthGuard)
-  findAll(): Promise<UserMessages[]> {
-    return this.userMessagesService.findAll();
-  }
-
   @Get('grouped')
   @UseGuards(AuthGuard)
   findGrouped(): Promise<
-    { email: string; count: number; unreadCount: number }[]
+    { email: string; count: number; unreadCount: number; lastDate: Date }[]
   > {
     return this.userMessagesService.findGrouped();
+  }
+
+  @Get(':email')
+  @UseGuards(AuthGuard)
+  findOneByEmail(@Param('email') email: string): Promise<UserMessages[]> {
+    return this.userMessagesService.findMessagesByEmail(email);
   }
 
   @Patch(':id/read')

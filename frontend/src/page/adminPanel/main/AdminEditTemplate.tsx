@@ -10,7 +10,7 @@ const AdminEditTemplate: React.FC<AdminEditTemplateProps> = ({ children }) => {
       <a href="/admin" className="text-6xl">
         🔙
       </a>
-      <div className="p-6">{children}</div>
+      <div className="mb-5 sm:p-6">{children}</div>
     </div>
   );
 };

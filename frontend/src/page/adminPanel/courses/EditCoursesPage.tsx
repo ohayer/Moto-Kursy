@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AdminEditTemplate from "../AdminEditTemplate";
+import AdminEditTemplate from "../main/AdminEditTemplate";
 import FetchAllCourses from "./api/FetchAllCourses";
 import Card from "../../../components/Card";
 import CourseModal from "./CourseModal";

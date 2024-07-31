@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthProvider";
-import fetchProfile, { UserProfile } from "../../api/FetchProfile";
+import { useAuth } from "../../../context/AuthProvider";
+import fetchProfile, { UserProfile } from "../../../api/FetchProfile";
 
 // component to check if the user is still logged in and fetch the user profile every 60 seconds
 const useCheckSession = () => {

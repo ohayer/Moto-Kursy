@@ -21,6 +21,6 @@ export class UserMessages {
   @Column({ default: false })
   read: boolean;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
   createdAt: Date;
 }
